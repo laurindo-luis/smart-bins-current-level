@@ -15,5 +15,4 @@ public class SmartBinsLevel {
 		this.records = records;
 	}
 	
-	
 }
