@@ -4,6 +4,7 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,17 +15,18 @@ public class SmartBinsLevelService {
 	@Autowired
 	private SmartBinsLevelFieldRepository smartBinsLevelFieldRepository;
 	
-	private SmartBinsLevelDto get() {
+	private ResponseEntity<SmartBinsLevelDto> get() {
 		RestTemplate rest = new RestTemplate();
 		ResponseEntity<SmartBinsLevelDto> response = rest.getForEntity("https://data.randwick.nsw.gov.au/api/"
 				+ "records/1.0/search/?dataset=smart-bins-current-level&q=&rows=100&sort=timestamp&"
 				+ "timezone=America/Argentina/Buenos_Aires&facet=bin_id&facet=bin_status", 
 				SmartBinsLevelDto.class);
-		return response.getBody();
+		return response;
 	}
 	
-	public void save() {
-		SmartBinsLevelDto smartBinsLevel = get();
+	public HttpStatus save() {
+		ResponseEntity<SmartBinsLevelDto> response = get();
+		SmartBinsLevelDto smartBinsLevel = response.getBody();
 		if(nonNull(smartBinsLevel)) {
 			List<Record> records = smartBinsLevel.getRecords();
 			records.forEach(record -> {
@@ -35,5 +37,6 @@ public class SmartBinsLevelService {
 				}
 			});
 		}
+		return response.getStatusCode();
 	}
 }

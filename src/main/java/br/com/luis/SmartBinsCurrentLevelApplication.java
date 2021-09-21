@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
 
 @SpringBootApplication
 public class SmartBinsCurrentLevelApplication {
@@ -23,14 +24,13 @@ public class SmartBinsCurrentLevelApplication {
 	@Bean
 	public CommandLineRunner run() {
 		return args -> {
-			
 			long minute = 60;
 			new Timer().scheduleAtFixedRate(new TimerTask() {
-				public void run() {
+				public void run() {					
+					HttpStatus status = smartBinsLevelService.save();
 					LocalDateTime dateTime = LocalDateTime.now();
-					System.out.print("Task scheduler has run -> "+dateTime);
-					
-					smartBinsLevelService.save();
+					System.out.print(String.format("Task scheduler has run -> %s | Status Http: %s", 
+							dateTime, status));
 				}
 			}, 0, minute * 60000);
 		};
