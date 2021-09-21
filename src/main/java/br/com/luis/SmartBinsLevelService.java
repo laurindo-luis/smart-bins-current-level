@@ -16,7 +16,9 @@ public class SmartBinsLevelService {
 	
 	private SmartBinsLevelDto get() {
 		RestTemplate rest = new RestTemplate();
-		ResponseEntity<SmartBinsLevelDto> response = rest.getForEntity("https://data.randwick.nsw.gov.au/api/records/1.0/search/?dataset=smart-bins-current-level&q=&rows=100&sort=timestamp&timezone=America/Argentina/Buenos_Aires&facet=bin_id&facet=bin_status", 
+		ResponseEntity<SmartBinsLevelDto> response = rest.getForEntity("https://data.randwick.nsw.gov.au/api/"
+				+ "records/1.0/search/?dataset=smart-bins-current-level&q=&rows=100&sort=timestamp&"
+				+ "timezone=America/Argentina/Buenos_Aires&facet=bin_id&facet=bin_status", 
 				SmartBinsLevelDto.class);
 		return response.getBody();
 	}
@@ -31,7 +33,6 @@ public class SmartBinsLevelService {
 					SmartBinsLevelField smartBinsLevelField = SmartBinsLevelField.create(field);
 					smartBinsLevelFieldRepository.save(smartBinsLevelField);
 				}
-				
 			});
 		}
 	}

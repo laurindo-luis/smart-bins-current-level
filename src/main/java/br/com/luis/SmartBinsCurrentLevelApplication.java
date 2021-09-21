@@ -28,7 +28,7 @@ public class SmartBinsCurrentLevelApplication {
 			new Timer().scheduleAtFixedRate(new TimerTask() {
 				public void run() {
 					LocalDateTime dateTime = LocalDateTime.now();
-					System.out.print("Saving data -> "+dateTime);
+					System.out.print("Task scheduler has run -> "+dateTime);
 					
 					smartBinsLevelService.save();
 				}
