@@ -15,6 +15,7 @@ public class Field {
 	public String getBin_id() {
 		return bin_id;
 	}
+	
 	public void setBin_id(String bin_id) {
 		this.bin_id = bin_id;
 	}

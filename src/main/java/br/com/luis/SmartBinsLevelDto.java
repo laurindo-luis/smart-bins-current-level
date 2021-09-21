@@ -2,11 +2,10 @@ package br.com.luis;
 
 import java.util.List;
 
-public class SmartBinsLevel {
+public class SmartBinsLevelDto {
 	
 	private List<Record> records;
 
-	
 	public List<Record> getRecords() {
 		return records;
 	}

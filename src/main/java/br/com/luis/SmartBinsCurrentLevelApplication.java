@@ -19,8 +19,7 @@ public class SmartBinsCurrentLevelApplication {
 	@Bean
 	public CommandLineRunner run() {
 		return args -> {
-			smartBinsLevelService.get();
+			smartBinsLevelService.save();
 		};
 	}
-
 }
