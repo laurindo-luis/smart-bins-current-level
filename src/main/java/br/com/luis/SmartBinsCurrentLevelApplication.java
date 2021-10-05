@@ -29,13 +29,11 @@ public class SmartBinsCurrentLevelApplication {
 	@Bean
 	public CommandLineRunner run() {
 		return args -> {
-			long minute = 1;
+			long minute = 60;
 			new Timer().scheduleAtFixedRate(new TimerTask() {
 				public void run() {					
 					HttpStatus status = smartBinsLevelService.save();
-					LocalDateTime dateTime = LocalDateTime.now();
-					logger.info(String.format("Task scheduler has run -> %s | Status Http: %s", 
-							dateTime, status));
+					logger.info("Task scheduler has run. Status Http: "+status);
 				}
 			}, 0, minute * 60000);
 		};
