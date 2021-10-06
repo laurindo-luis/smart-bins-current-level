@@ -1,6 +1,5 @@
 package br.com.luis;
 
-import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 

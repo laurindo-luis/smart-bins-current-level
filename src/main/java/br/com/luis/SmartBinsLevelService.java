@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -24,7 +24,7 @@ public class SmartBinsLevelService {
 					+ "timezone=America/Argentina/Buenos_Aires&facet=bin_id&facet=bin_status", 
 					SmartBinsLevelDto.class);
 			return response;
-		} catch(ResourceAccessException e) {
+		} catch(RestClientException e) {
 			return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(null);
 		}
 	}
